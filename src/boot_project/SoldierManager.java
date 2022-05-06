@@ -25,6 +25,7 @@ public class SoldierManager {
 				String p_name = scan.next();
 				pv = new PositionVO (0L, p_name);
 				pdao.insertPosition(pv);
+				sel = sdao.selectNum(p_name);
 			}
 			System.out.print("입대일 입력 : ");
 			String inDay = scan.next();

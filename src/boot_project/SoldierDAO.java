@@ -50,5 +50,38 @@ private JdbcTemplate jdbcTemplate;
 		}
 		return ret;
 	}
+	
+	public long selectNum(String name) {
+		long num = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "select \"NUMBER\" from \"POSITION\" where  =  ";	
+		ResultSet rs = null;
+		try {
+			con = jdbcTemplate.getConnection();
+			pstmt = con.prepareStatement(sql);
+			num = rs.getLong(1);
+			int res = pstmt.executeUpdate();
+			System.out.println("입력 완료");		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return num;
+	}
 
 }
